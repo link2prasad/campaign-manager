@@ -21,4 +21,10 @@ class UserTest < ActiveSupport::TestCase
     user = User.new(email: user_one.email, password_digest: "pass2", username: "any_user")
     assert_not user.valid?
   end
+
+  test "user with taken username should be invalid" do
+    user_one = users(:one)
+    user = User.new(email: "user4@demo.org", password_digest: "pass2", username: user_one.username)
+    assert_not user.valid?
+  end
 end
