@@ -10,6 +10,10 @@ class User < ApplicationRecord
   # validates :password, presence: true, length: { minimum: 6, maximum: 255 }
   has_secure_password
 
+  has_many  :campaigns, dependent: :destroy
+
+
+
   def self.is_a_valid_email? email
     email =~VALID_EMAIL_REGEX
   end

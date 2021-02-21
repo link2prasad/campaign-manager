@@ -1,5 +1,7 @@
 require 'test_helper'
-
+class User < ApplicationRecord
+  has_many :campaigns, dependent: :destroy
+end
 class UserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
