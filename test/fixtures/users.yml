@@ -2,7 +2,7 @@
 
 one:
   email: user1@demo.org
-  password_digest: hashed_password
+  password_digest: <%= BCrypt::Password.create("hashed_password") %>
   username: user1
 
 two:
