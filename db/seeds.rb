@@ -20,8 +20,8 @@ User.delete_all
 
   2.times do
     campaign = Campaign.create!(
-        title: Faker::Hipster.sentence(word_count: 3),
-        purpose: Faker::Hipster.sentences(number: 1),
+        title: Faker::Hipster.sentence,
+        purpose: Faker::Lorem.paragraph(sentence_count: 3),
         starts_on: Faker::Time.between_dates(from: Date.today, to: Date.today + 5, period: :all),
         ends_on: Faker::Time.between_dates(from: Date.today+5, to: Date.today + 90, period: :all),
         user_id: user.id
