@@ -11,7 +11,7 @@ class Api::V1::CampaignsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     json_response = JSON.parse(self.response.body)
-    assert_equal @campaign.title, json_response['title']
+    assert_equal @campaign.title, json_response['data']['attributes']['title']
   end
 
   test "should list campaigns" do

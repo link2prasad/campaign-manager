@@ -5,17 +5,18 @@ class Api::V1::CampaignsController < ApplicationController
 
   #GET /campaigns/:id
   def show
-    render json: @campaign
+    render json: CampaignSerializer.new(@campaign).serializable_hash
   end
 
   def index
-    render json: Campaign.all
+    campaigns = Campaign.all
+    render json: CampaignSerializer.new(campaigns).serializable_hash
   end
 
   def create
     campaign = current_user.campaigns.build(campaign_params)
     if campaign.save
-      render json: campaign, status: :created
+      render json: CampaignSerializer.new(campaign).serializable_hash, status: :created
     else
       render_error(campaign.errors)
     end
@@ -23,7 +24,7 @@ class Api::V1::CampaignsController < ApplicationController
 
   def update
     if @campaign.update(campaign_params)
-      render json: @campaign, status: :ok
+      render json: CampaignSerializer.new(@campaign).serializable_hash, status: :ok
     else
       render_error(@campaign.errors)
     end
