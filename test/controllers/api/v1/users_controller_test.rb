@@ -17,7 +17,7 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_difference('User.count') do
       post api_v1_users_url, params: { user: {
           email: "test@test.org",
-          username: "test",
+          username: "test1",
           password: "123456"
       }}, as: :json
     end
