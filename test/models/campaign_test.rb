@@ -13,6 +13,12 @@ class CampaignTest < ActiveSupport::TestCase
     assert_not campaign.valid?
   end
 
+  test "should have a valid user" do
+    campaign = campaigns(:one)
+    campaign.user = nil
+    assert_not campaign.valid?
+  end
+
   test "should have a valid start date" do
     campaign = campaigns(:one)
     campaign.starts_on = nil

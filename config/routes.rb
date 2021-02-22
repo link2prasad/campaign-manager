@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       # Our resources will be listed here
       resources :users, only: %i[show create update destroy]
       resources :tokens, only: %i[create]
-      resources :campaigns, only: %i[show index]
+      resources :campaigns
     end
   end
 end
