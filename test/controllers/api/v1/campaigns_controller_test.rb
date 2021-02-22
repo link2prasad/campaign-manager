@@ -10,8 +10,14 @@ class Api::V1::CampaignsControllerTest < ActionDispatch::IntegrationTest
     get api_v1_campaign_url(@campaign), as: :json
     assert_response :success
 
-    json_response = JSON.parse(self.response.body)
-    assert_equal @campaign.title, json_response['data']['attributes']['title']
+    # json_response = JSON.parse(self.response.body)
+    # assert_equal @campaign.title, json_response['data']['attributes']['title']
+
+    json_response = JSON.parse(self.response.body, symbolize_names: true)
+
+    assert_equal @campaign.title, json_response.dig(:data, :attributes, :title)
+    assert_equal @campaign.user.id.to_s, json_response.dig(:data, :relationships, :user, :data, :id)
+    assert_equal @campaign.user.email, json_response.dig(:included, 0, :attributes, :email)
   end
 
   test "should list campaigns" do

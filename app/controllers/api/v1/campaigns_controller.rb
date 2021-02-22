@@ -5,7 +5,8 @@ class Api::V1::CampaignsController < ApplicationController
 
   #GET /campaigns/:id
   def show
-    render json: CampaignSerializer.new(@campaign).serializable_hash
+    options = {include: [:user]}
+    render json: CampaignSerializer.new(@campaign, options).serializable_hash
   end
 
   def index
