@@ -10,7 +10,7 @@ class Campaign < ApplicationRecord
   pg_search_scope :search_full_word,
                   :against => [:title, :purpose],
                   :using => [:tsearch],
-                  order_within_rank: "campaigns.created_at ASC"
+                  order_within_rank: "campaigns.created_at DESC"
 
   scope :active, -> { where('starts_on < ?', Time.now )}
   scope :upcoming, -> { where('starts_on > ?', Time.now )}

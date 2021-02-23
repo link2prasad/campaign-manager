@@ -45,4 +45,10 @@ class CampaignTest < ActiveSupport::TestCase
   test "should filter campaigns by title and sort them" do
     assert_equal [campaigns(:three), campaigns(:two)], Campaign.search_full_word("content").sort
   end
+
+#   TODO: pending test cases
+#   Campaign.search({campaign_ids: [41, 42, 43]})
+#   Campaign.search({})
+#   Campaign.search({keyword: "content"})
+#   Campaign.search({keyword: "ut", campaign_ids: [35, 40], status: "completed"})
 end
