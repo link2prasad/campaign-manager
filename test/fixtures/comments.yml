@@ -3,11 +3,11 @@
 one:
   body: MyText
   user: one
-  commentable_type: Discussion
-  commentable_id: one
+  commentable: one (discussion)
+
 
 two:
   body: MyText
   user: two
-  commentable_type: Discussion
-  commentable_id: two
+  commentable: two (discussion)
+

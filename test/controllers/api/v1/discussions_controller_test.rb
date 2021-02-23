@@ -27,6 +27,7 @@ class Api::V1::DiscussionsControllerTest < ActionDispatch::IntegrationTest
            }},
            headers: {Authorization: JsonWebToken.encode(user_id: @discussion.user_id)},
            as: :json
+      assert_response :success
     end
   end
 
@@ -39,6 +40,7 @@ class Api::V1::DiscussionsControllerTest < ActionDispatch::IntegrationTest
                campaign_id: @discussion.campaign_id
            }},
            as: :json
+      assert_response :forbidden
     end
   end
 
@@ -51,6 +53,7 @@ class Api::V1::DiscussionsControllerTest < ActionDispatch::IntegrationTest
            }},
            headers: {Authorization: JsonWebToken.encode(user_id: @discussion.user_id)},
            as: :json
+      assert_response :unprocessable_entity
     end
   end
 
