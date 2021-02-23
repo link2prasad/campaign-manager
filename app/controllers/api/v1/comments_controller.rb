@@ -1,4 +1,5 @@
 class Api::V1::CommentsController < ApplicationController
+  before_action :set_comment, only: %i[destroy]
   before_action :check_login, only: %i[create]
   before_action :check_owner, only: %i[destroy]
 
@@ -24,6 +25,10 @@ class Api::V1::CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body)
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
 
   def check_owner
