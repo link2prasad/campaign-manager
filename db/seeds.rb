@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Discussion.delete_all
 Campaign.delete_all
 User.delete_all
 # user = User.create(email: 'toto@toto.fr', password: 'toto123', username: 'toto')
@@ -27,5 +28,16 @@ User.delete_all
         user_id: user.id
     )
     puts "Created brand new campaign: #{campaign.title}"
+
+    1.times do
+      discussion = Discussion.create!(
+          topic: Faker::Book.title,
+          body: Faker::Lorem.paragraph(sentence_count: 3),
+          campaign_id: campaign.id,
+          user_id: user.id
+      )
+
+      puts "Started new discussion topic: #{discussion.topic}"
+    end
   end
 end

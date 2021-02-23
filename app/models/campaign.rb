@@ -1,6 +1,8 @@
 class Campaign < ApplicationRecord
   belongs_to :user
   has_one :discussion, dependent: :destroy
+  # has_many :comments, as: :commentable, dependent: :destroy
+
   validates :title,     presence: true
   validates :purpose,   presence: true
   validates_presence_of :starts_on, :ends_on

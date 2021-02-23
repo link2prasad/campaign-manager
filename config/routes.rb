@@ -6,7 +6,9 @@ Rails.application.routes.draw do
       resources :users, only: %i[show create update destroy]
       resources :tokens, only: %i[create]
       resources :campaigns do
-        resources :discussions, only: %i[show create update destroy]
+        resources :discussions, only: %i[show create update destroy] do
+          resources :comments, module: :discussions
+        end
       end
       resources :discussions, only: %i[index]
     end
