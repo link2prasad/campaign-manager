@@ -47,3 +47,5 @@ gem "jwt", "~> 2.2"
 gem "faker", "~> 2.16"
 
 gem "jsonapi-serializer", "~> 2.1"
+
+gem "pg_search", "~> 2.3"

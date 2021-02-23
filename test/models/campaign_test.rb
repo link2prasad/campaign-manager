@@ -38,4 +38,11 @@ class CampaignTest < ActiveSupport::TestCase
     assert_not campaign.valid?
   end
 
+  test "should filter campaigns by title" do
+    assert_equal 2, Campaign.search_full_word("content").count
+  end
+
+  test "should filter campaigns by title and sort them" do
+    assert_equal [campaigns(:three), campaigns(:two)], Campaign.search_full_word("content").sort
+  end
 end

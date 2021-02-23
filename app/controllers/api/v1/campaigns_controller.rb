@@ -10,7 +10,7 @@ class Api::V1::CampaignsController < ApplicationController
   end
 
   def index
-    campaigns = Campaign.all
+    campaigns = Campaign.search(params)
     render json: CampaignSerializer.new(campaigns).serializable_hash
   end
 
