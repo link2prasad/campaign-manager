@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_22_234704) do
+ActiveRecord::Schema.define(version: 2021_02_23_124035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 2021_02_22_234704) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_campaigns_on_user_id"
+  end
+
+  create_table "discussions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "campaign_id", null: false
+    t.string "topic", null: false
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["campaign_id"], name: "index_discussions_on_campaign_id"
+    t.index ["user_id"], name: "index_discussions_on_user_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -46,4 +57,6 @@ ActiveRecord::Schema.define(version: 2021_02_22_234704) do
   end
 
   add_foreign_key "campaigns", "users"
+  add_foreign_key "discussions", "campaigns"
+  add_foreign_key "discussions", "users"
 end

@@ -51,4 +51,5 @@ class CampaignTest < ActiveSupport::TestCase
 #   Campaign.search({})
 #   Campaign.search({keyword: "content"})
 #   Campaign.search({keyword: "ut", campaign_ids: [35, 40], status: "completed"})
+#   http://localhost:3000/api/v1/campaigns?campaign_ids%5B%5D=43&campaign_ids%5B%5D=41&campaign_ids%5B%5D=40
 end
