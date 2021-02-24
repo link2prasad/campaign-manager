@@ -28,8 +28,9 @@ class Campaign < ApplicationRecord
     campaigns = campaigns.active if params[:status]=="active"
     campaigns = campaigns.upcoming if params[:status]=="upcoming"
     campaigns = campaigns.completed if params[:status]=="completed"
-    campaigns = campaigns.created_before if params[:status]=="created_before"
-    campaigns = campaigns.recent if params[:status]=="recent"
+    campaigns = campaigns.created_before(params[:created_before])  if params[:created_before].present?
+    campaigns = campaigns.created_by(params[:created_by]) if params[:created_by].present?
+    campaigns = campaigns.recent if params[:recent].present?
 
     campaigns
   end

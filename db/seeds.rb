@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Comment.delete_all
 Discussion.delete_all
 Campaign.delete_all
 User.delete_all
@@ -38,6 +39,22 @@ User.delete_all
       )
 
       puts "Started new discussion topic: #{discussion.topic}"
+    end
+  end
+end
+
+User.all.each do |user|
+  Discussion.all.each do |discussion|
+    5.times do
+      comment = Comment.create!(
+          body: Faker::Lorem.paragraph(sentence_count: 1),
+          commentable_id: discussion.id,
+          commentable_type: "Discussion",
+          user_id: user.id
+      )
+
+      puts "#{user.email} added new comment to discussion: #{discussion.topic}"
+      puts comment.body
     end
   end
 end
