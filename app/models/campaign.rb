@@ -2,6 +2,8 @@ class Campaign < ApplicationRecord
   belongs_to :user
   has_one :discussion, dependent: :destroy
   # has_many :comments, as: :commentable, dependent: :destroy
+  has_many :taggings, as: :taggable
+  has_many :tags, through: :taggings
 
   validates :title,     presence: true
   validates :purpose,   presence: true
@@ -33,6 +35,16 @@ class Campaign < ApplicationRecord
     campaigns = campaigns.recent if params[:recent].present?
 
     campaigns
+  end
+
+  def tag_names=(names)
+    self.tags = names.split(/,\s*/).map do |name|
+      Tag.find_or_create_by(name: name)
+    end
+  end
+
+  def tag_names
+    tags.join(', ')
   end
 
   private
