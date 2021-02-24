@@ -80,4 +80,13 @@ class Api::V1::CommentsControllerTest < ActionDispatch::IntegrationTest
       assert_response :forbidden
     end
   end
+
+  test "should list all comments for the discussion" do
+    get api_v1_campaign_discussion_comments_url({
+                                                campaign_id: @campaign.id,
+                                                discussion_id: @comment.commentable_id
+                                            }),
+        as: :json
+    assert_response :success
+  end
 end

@@ -18,8 +18,8 @@ class Comment < ApplicationRecord
 
   def self.search(params = {})
     comments = params[:comment_ids].present? ? Comment.where(id: params[:comment_ids]) : Comment.all
-
     comments = comments.for_discussion(params[:discussion_id])
+
     comments = comments.search_full_word(params[:keyword]) if params[:keyword]
     comments = comments.created_before(params[:created_before]) if params[:created_before].present?
     comments = comments.created_by(params[:created_by]) if params[:created_by].present?

@@ -3,6 +3,10 @@ class Api::V1::CommentsController < ApplicationController
   before_action :check_login, only: %i[create]
   before_action :check_owner, only: %i[destroy]
 
+  def index
+    comments = Comment.search(params)
+    render json: CommentSerializer.new(comments).serializable_hash
+  end
 
   def create
     comment = @commentable.comments.new comment_params
