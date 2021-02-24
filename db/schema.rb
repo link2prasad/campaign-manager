@@ -68,9 +68,12 @@ ActiveRecord::Schema.define(version: 2021_02_24_071539) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
+    t.bigint "taggings_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
+    t.index ["taggings_count"], name: "index_tags_on_taggings_count"
   end
 
   create_table "users", force: :cascade do |t|

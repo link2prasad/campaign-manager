@@ -2,6 +2,12 @@
 
 one:
   tag: one
+  taggable: one (campaign)
 
 two:
   tag: two
+  taggable: one (campaign)
+
+three:
+  tag: two
+  taggable: two (campaign)

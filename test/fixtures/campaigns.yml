@@ -7,6 +7,7 @@ one:
   ends_on: 2021-05-22 16:16:05
   user: one
 
+
 two:
   title: Boost user engagement
   purpose: gather user-generated content from 100 customers
@@ -14,9 +15,11 @@ two:
   ends_on: 2021-05-22 16:16:05
   user: two
 
+
 three:
   title: Generate revenue
   purpose: gather user-generated content from 100 customers
   starts_on: 2021-02-21 16:16:05
   ends_on: 2021-05-22 16:16:05
   user: two
+
