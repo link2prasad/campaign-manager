@@ -1,9 +1,11 @@
 class Campaign < ApplicationRecord
+
   belongs_to :user
   has_one :discussion, dependent: :destroy
-  # has_many :comments, as: :commentable, dependent: :destroy
-  has_many :taggings, as: :taggable
-  has_many :tags, through: :taggings
+
+
+  include Taggable
+  has_many_tags
 
   validates :title,     presence: true
   validates :purpose,   presence: true
@@ -23,6 +25,7 @@ class Campaign < ApplicationRecord
   scope :recent, lambda { order(updated_at: :desc) }
 
 
+
   def self.search(params = {})
     campaigns = params[:campaign_ids].present? ? Campaign.where(id: params[:campaign_ids]) : Campaign.all
 
@@ -37,17 +40,20 @@ class Campaign < ApplicationRecord
     campaigns
   end
 
-  def tag_names=(names)
-    self.tags = names.split(/,\s*/).map do |name|
-      Tag.find_or_create_by(name: name)
-    end
-  end
 
-  def tag_names
-    tags.join(', ')
-  end
+  # def tag_names=(names)
+  #   self.tags = names.split(/,\s*/).map do |name|
+  #     Tag.find_or_create_by(name: name)
+  #   end
+  # end
+  #
+  # def tag_names
+  #   tags.join(', ')
+  # end
 
   private
+
+
 
   def end_date_is_after_start_date
     return if ends_on.blank? || starts_on.blank?

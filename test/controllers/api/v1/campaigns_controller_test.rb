@@ -85,4 +85,47 @@ class Api::V1::CampaignsControllerTest < ActionDispatch::IntegrationTest
       assert_response :forbidden
     end
   end
+
+  test "should returns tag names" do
+    post api_v1_campaigns_url,
+         params: {campaign: {
+             title: @campaign.title,
+             purpose: @campaign.purpose,
+             starts_on: @campaign.starts_on,
+             ends_on: @campaign.ends_on,
+             tag_names: ["melbourne"]
+         }},
+         headers: {Authorization: JsonWebToken.encode(user_id: @campaign.user_id)},
+         as: :json
+
+    assert_response :success
+
+    # assert_equal @campaign.title, json_response['data']['attributes']['title']
+
+    json_response = JSON.parse(self.response.body, symbolize_names: true)
+    
+    assert_equal ['melbourne'], json_response.dig(:data, :attributes, :tag_names).to_a
+  end
+
+  test "should adds tags via their names" do
+  end
+
+  test "should accept completely new set of tags" do
+  end
+
+  test "should enumerates through tag names" do
+  end
+
+  test "should not allow duplication of tags" do
+  end
+
+  test "should append tag names" do
+  end
+
+  test "should remove a single tag name" do
+  end
+
+  test "should remove tag names" do
+  end
+
 end
