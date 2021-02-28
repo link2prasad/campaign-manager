@@ -42,6 +42,7 @@ class TagNames
     taggable.tags.delete Tag.where(:name => name).first
   end
 
+
   def each(&block)
     to_a.each &block
   end

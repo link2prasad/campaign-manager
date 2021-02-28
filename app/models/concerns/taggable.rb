@@ -19,6 +19,7 @@ module Taggable
   end
 
   def tag_names=(names)
+    names = names.uniq
     if names.is_a?(TagNames)
       @tag_names = names
     else
