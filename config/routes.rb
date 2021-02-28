@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         end
       end
       resources :discussions, only: %i[index]
+      resources :tags, only: %i[index]
     end
   end
 end

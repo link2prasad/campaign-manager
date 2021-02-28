@@ -1,4 +1,4 @@
 class TagSerializer
   include JSONAPI::Serializer
-  attributes :name
+  attributes :name, :taggings_count
 end

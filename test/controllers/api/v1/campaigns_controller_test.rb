@@ -25,6 +25,12 @@ class Api::V1::CampaignsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should query for keyword in active campaigns" do
+    get api_v1_campaigns_url(status: "active", keyword: "revenue"), as: :json
+    assert_response :success
+    # json_response = JSON.parse(self.response.body, symbolize_names: true)
+  end
+
   test "should create campaign, by a user" do
     assert_difference('Campaign.count') do
       post api_v1_campaigns_url,
