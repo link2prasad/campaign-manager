@@ -130,4 +130,60 @@ class CampaignTest < ActiveSupport::TestCase
       assert_equal campaign.tags.collect(&:name), ['portland']
     end
   end
+
+
+  test "should remove associated tag when no more linked to campaign" do
+    campaign = campaigns(:one)
+    campaign.tag_names = %w(portland washington delhi)
+
+    assert_difference('Tag.count', -2) do
+      campaign.tag_names -= %w(washington delhi)
+      assert_equal campaign.tags.collect(&:name), ['portland']
+    end
+  end
+
+  ## Tag names for scopes
+  test "should return tag names for a given model" do
+    campaign = campaigns(:one)
+    campaign.tag_names = %w( koala wombat )
+
+    assert_no_difference('Tag.count') do
+      campaign = campaigns(:two)
+      campaign.tag_names = %w( koala wombat )
+      assert_equal Tag.names_for_scope(Campaign), %w( koala wombat )
+    end
+  end
+
+  test "should return tag names for a given scope" do
+    campaign = campaigns(:one)
+    campaign.tag_names = %w( koala wombat )
+
+
+    campaign2 = campaigns(:two)
+    campaign2.tag_names = %w( cassowary )
+    assert_equal Tag.names_for_scope(Campaign.where(:title => campaign.title)), %w( koala wombat )
+  end
+
+  test "should not duplicate tag names for a given model/scope" do
+    campaign = campaigns(:one)
+    campaign.tag_names = %w( koala wombat )
+
+    campaign2 = campaigns(:two)
+    campaign2.tag_names = %w( cassowary )
+
+    campaign3 = campaigns(:three)
+    campaign3.tag_names = %w( cassowary wombat )
+
+    assert_equal Tag.names_for_scope(Campaign), %w( cassowary koala wombat )
+  end
+
+  test "should return an empty array for an empty scope" do
+    campaign = campaigns(:one)
+    campaign.tag_names = %w( koala wombat )
+
+    campaign2 = campaigns(:two)
+    campaign2.tag_names = %w( cassowary )
+
+    assert_equal Tag.names_for_scope(Campaign.where(:title => "reptiles")), %w( )
+  end
 end

@@ -39,7 +39,7 @@ class TagNames
   end
 
   def delete(name)
-    taggable.tags.delete Tag.where(:name => name).first
+    taggable.tags.destroy Tag.where(:name => name).first
   end
 
 
